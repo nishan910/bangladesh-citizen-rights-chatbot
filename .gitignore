@@ -11,3 +11,5 @@ chroma_db/
 *.faiss
 Thumbs.db
 .vscode/
+# Temporary PDF preview images
+contract_page*.png
