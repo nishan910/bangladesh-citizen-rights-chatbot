@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000'
@@ -25,13 +25,13 @@ function App() {
       })
 
       const data = await response.json()
-      if (!response.ok) throw new Error('à¦¸à¦¾à¦°à§à¦­à¦¾à¦°à§‡ à¦¸à¦®à¦¸à§à¦¯à¦¾ à¦¹à§Ÿà§‡à¦›à§‡à¥¤')
+      if (!response.ok) throw new Error('সার্ভারে সমস্যা হয়েছে।')
 
       setMessages((prev) => [
         ...prev,
         {
           role: 'assistant',
-          content: data.answer || 'à¦•à§‹à¦¨à§‹ à¦‰à¦¤à§à¦¤à¦° à¦ªà¦¾à¦“à§Ÿà¦¾ à¦¯à¦¾à§Ÿà¦¨à¦¿à¥¤',
+          content: data.answer || 'কোনো উত্তর পাওয়া যায়নি।',
           sources: data.sources || [],
         },
       ])
@@ -40,7 +40,7 @@ function App() {
         ...prev,
         {
           role: 'assistant',
-          content: 'à¦¸à¦‚à¦¯à§‹à¦— à¦•à¦°à¦¾ à¦¯à¦¾à¦šà§à¦›à§‡ à¦¨à¦¾à¥¤ Backend à¦šà¦¾à¦²à§ à¦†à¦›à§‡ à¦•à¦¿ à¦¨à¦¾ à¦ªà¦°à§€à¦•à§à¦·à¦¾ à¦•à¦°à§à¦¨à¥¤',
+          content: 'সংযোগ করা যাচ্ছে না। Backend চালু আছে কি না পরীক্ষা করুন।',
           sources: [],
         },
       ])
@@ -52,26 +52,26 @@ function App() {
   return (
     <main className="app">
       <header className="header">
-        <div className="brand-icon">âš–ï¸</div>
+        <div className="brand-icon">⚖️</div>
         <div>
-          <h1>à¦¨à¦¾à¦—à¦°à¦¿à¦• à¦…à¦§à¦¿à¦•à¦¾à¦° à¦¸à¦¹à¦¾à¦¯à¦¼à¦•</h1>
-          <p>à¦¬à¦¾à¦‚à¦²à¦¾à¦¦à§‡à¦¶à§‡à¦° à¦†à¦‡à¦¨ à¦“ à¦¨à¦¾à¦—à¦°à¦¿à¦• à¦…à¦§à¦¿à¦•à¦¾à¦° à¦¸à¦®à§à¦ªà¦°à§à¦•à§‡ à¦œà¦¾à¦¨à§à¦¨</p>
+          <h1>নাগরিক অধিকার সহায়ক</h1>
+          <p>বাংলাদেশের আইন ও নাগরিক অধিকার সম্পর্কে জানুন</p>
         </div>
       </header>
 
       <section className="chat">
         {messages.length === 0 && (
           <div className="welcome">
-            <div className="welcome-icon">ðŸ“š</div>
-            <h2>à¦†à¦ªà¦¨à¦¾à¦•à§‡ à¦¸à§à¦¬à¦¾à¦—à¦¤à¦®</h2>
-            <p>à¦¬à¦¾à¦‚à¦²à¦¾à¦¦à§‡à¦¶à§‡à¦° à¦†à¦‡à¦¨ à¦¸à¦®à§à¦ªà¦°à§à¦•à§‡ à¦†à¦ªà¦¨à¦¾à¦° à¦ªà§à¦°à¦¶à§à¦¨à¦Ÿà¦¿ à¦¬à¦¾à¦‚à¦²à¦¾à§Ÿ à¦²à¦¿à¦–à§à¦¨à¥¤</p>
+            <div className="welcome-icon">📚</div>
+            <h2>আপনাকে স্বাগতম</h2>
+            <p>বাংলাদেশের আইন সম্পর্কে আপনার প্রশ্নটি বাংলায় লিখুন।</p>
             <button
               className="suggestion"
               onClick={() =>
-                setQuestion('à¦ªà¦¾à¦°à¦¿à¦¬à¦¾à¦°à¦¿à¦• à¦¸à¦¹à¦¿à¦‚à¦¸à¦¤à¦¾à¦° à¦¶à¦¿à¦•à¦¾à¦° à¦¹à¦²à§‡ à¦•à§€ à¦¸à§à¦°à¦•à§à¦·à¦¾ à¦ªà¦¾à¦“à§Ÿà¦¾ à¦¯à¦¾à§Ÿ?')
+                setQuestion('পারিবারিক সহিংসতার শিকার হলে কী সুরক্ষা পাওয়া যায়?')
               }
             >
-              à¦ªà¦¾à¦°à¦¿à¦¬à¦¾à¦°à¦¿à¦• à¦¸à¦¹à¦¿à¦‚à¦¸à¦¤à¦¾ à¦¸à¦®à§à¦ªà¦°à§à¦•à§‡ à¦œà¦¿à¦œà§à¦žà¦¾à¦¸à¦¾ à¦•à¦°à§à¦¨
+              পারিবারিক সহিংসতা সম্পর্কে জিজ্ঞাসা করুন
             </button>
           </div>
         )}
@@ -79,13 +79,13 @@ function App() {
         {messages.map((message, index) => (
           <article className={`message ${message.role}`} key={index}>
             <strong>
-              {message.role === 'user' ? 'à¦†à¦ªà¦¨à¦¾à¦° à¦ªà§à¦°à¦¶à§à¦¨' : 'à¦†à¦‡à¦¨ à¦¸à¦¹à¦¾à¦¯à¦¼à¦•'}
+              {message.role === 'user' ? 'আপনার প্রশ্ন' : 'আইন সহায়ক'}
             </strong>
             <p className="message-content">{message.content}</p>
 
             {message.sources?.length > 0 && (
               <details className="sources">
-                <summary>à¦†à¦‡à¦¨à§‡à¦° à¦‰à§Žà¦¸ ({message.sources.length})</summary>
+                <summary>আইনের উৎস ({message.sources.length})</summary>
                 <ul>
                   {message.sources.map((source, i) => (
                     <li key={i}>
@@ -104,25 +104,25 @@ function App() {
           </article>
         ))}
 
-        {loading && <p className="loading">à¦‰à¦¤à§à¦¤à¦° à¦¤à§ˆà¦°à¦¿ à¦¹à¦šà§à¦›à§‡â€¦</p>}
+        {loading && <p className="loading">উত্তর তৈরি হচ্ছে…</p>}
       </section>
 
       <form className="composer" onSubmit={sendMessage}>
         <textarea
           value={question}
           onChange={(event) => setQuestion(event.target.value)}
-          placeholder="à¦à¦–à¦¾à¦¨à§‡ à¦†à¦ªà¦¨à¦¾à¦° à¦ªà§à¦°à¦¶à§à¦¨ à¦²à¦¿à¦–à§à¦¨..."
+          placeholder="এখানে আপনার প্রশ্ন লিখুন..."
           rows={2}
           disabled={loading}
         />
         <button type="submit" disabled={loading || !question.trim()}>
-          {loading ? 'à¦…à¦ªà§‡à¦•à§à¦·à¦¾ à¦•à¦°à§à¦¨â€¦' : 'à¦ªà§à¦°à¦¶à§à¦¨ à¦ªà¦¾à¦ à¦¾à¦¨ â†‘'}
+          {loading ? 'অপেক্ষা করুন…' : 'প্রশ্ন পাঠান ↑'}
         </button>
       </form>
 
       <footer className="footer">
-        à¦à¦‡ à¦šà§à¦¯à¦¾à¦Ÿà¦¬à¦Ÿ à¦¸à¦¾à¦§à¦¾à¦°à¦£ à¦†à¦‡à¦¨à¦¿ à¦¤à¦¥à§à¦¯ à¦¦à§‡à§Ÿ, à¦†à¦‡à¦¨à¦œà§€à¦¬à§€à¦° à¦¬à¦¿à¦•à¦²à§à¦ª à¦¨à§Ÿà¥¤ à¦—à§à¦°à§à¦¤à§à¦¬à¦ªà§‚à¦°à§à¦£
-        à¦¸à¦¿à¦¦à§à¦§à¦¾à¦¨à§à¦¤à§‡à¦° à¦†à¦—à§‡ à¦®à§‚à¦² à¦†à¦‡à¦¨ à¦¯à¦¾à¦šà¦¾à¦‡ à¦•à¦°à§à¦¨à¥¤
+        এই চ্যাটবট সাধারণ আইনি তথ্য দেয়, আইনজীবীর বিকল্প নয়। গুরুত্বপূর্ণ
+        সিদ্ধান্তের আগে মূল আইন যাচাই করুন।
       </footer>
     </main>
   )
