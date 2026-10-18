@@ -13,3 +13,7 @@ Thumbs.db
 .vscode/
 # Temporary PDF preview images
 contract_page*.png
+
+# Frontend build files
+frontend/node_modules/
+frontend/dist/
