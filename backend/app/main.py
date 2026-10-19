@@ -3,6 +3,7 @@ from functools import lru_cache
 from pathlib import Path
 
 import chromadb
+import torch
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -10,6 +11,9 @@ from groq import Groq
 from sentence_transformers import SentenceTransformer
 
 from backend.app.schemas import ChatRequest, ChatResponse
+
+torch.set_num_threads(1)
+torch.set_num_interop_threads(1)
 
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(dotenv_path=ROOT / ".env")
@@ -41,7 +45,11 @@ def get_retriever():
 
     client = chromadb.PersistentClient(path=str(DB_PATH))
     collection = client.get_collection(COLLECTION_NAME)
-    model = SentenceTransformer(MODEL_NAME)
+    model = SentenceTransformer(
+        MODEL_NAME,
+        device="cpu",
+        model_kwargs={"torch_dtype": "float32"},
+    )
     return collection, model
 
 
@@ -228,6 +236,4 @@ def chat(request: ChatRequest):
             ),
             sources=[],
         )
-
-
 
